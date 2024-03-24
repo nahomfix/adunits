@@ -24,7 +24,7 @@ function App() {
             {adUnit && (
                 <AdUnit
                     id="gameLoaderScript"
-                    src="https://wat.adludio.com/loaders/cda/dsp_tester.js"
+                    src="/dsp_tester.js"
                     data={adUnit}
                 />
             )}
