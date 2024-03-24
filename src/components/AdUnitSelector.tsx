@@ -11,13 +11,18 @@ export const AdUnitSelector: FC = () => {
     const gameKey = useGameKeyStore((state) => state.gameKey);
     const setGameKey = useGameKeyStore((state) => state.setGameKey);
 
+    const changeGameKey = (gameKey: string) => {
+        setGameKey(gameKey);
+        window.location.reload();
+    };
+
     return (
         <Container>
             <label htmlFor="gameKey">Game Key</label>
             <select
                 id="gameKey"
                 value={gameKey}
-                onChange={(e) => setGameKey(e.target.value)}
+                onChange={(e) => changeGameKey(e.target.value)}
             >
                 <option value="">Please select an ad unit</option>
                 {availableGameKeys.map((availableGameKey) => (
