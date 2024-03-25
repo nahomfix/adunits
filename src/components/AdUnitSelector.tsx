@@ -34,6 +34,7 @@ export const AdUnitSelector: FC = () => {
                 onChange={(e: SelectChangeEvent) =>
                     changeGameKey(e.target.value)
                 }
+                placeholder="Please select an ad unit"
             >
                 <MenuItem value="">Please select an ad unit</MenuItem>
                 {availableGameKeys.map((availableGameKey) => (
