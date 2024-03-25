@@ -11,8 +11,9 @@ export const Logs: FC = () => {
             <Typography variant="h5" fontWeight={700} align="center">
                 Event Logs
             </Typography>
-            {eventTypes.map((eventType) => (
+            {eventTypes.map((eventType, index) => (
                 <Log
+                    key={index}
                     eventType={eventType.eventType}
                     timestamp={eventType.timestamp}
                 />
