@@ -79,7 +79,7 @@ function App() {
                 {adUnit && (
                     <AdUnit
                         id="gameLoaderScript"
-                        src="/dsp_tester.js"
+                        src="dsp_tester.js"
                         data={adUnit}
                     />
                 )}
