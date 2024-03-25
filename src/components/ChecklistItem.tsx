@@ -1,6 +1,9 @@
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Stack from "@mui/material/Stack";
 import { FC } from "react";
-import styled from "styled-components";
 import { useChecklistStore } from "../store/useChecklistStore";
 
 interface ChecklistItemProps {
@@ -12,66 +15,43 @@ export const ChecklistItem: FC<ChecklistItemProps> = ({ name }) => {
     const disableEvent = useChecklistStore((state) => state.disableEvent);
     const checklist = useChecklistStore((state) => state.list);
 
-    const getStatus = (eventType) => {
+    const getStatus = (eventType: string) => {
         if (!checklist[eventType]["touched"]) return null;
 
         if (
             checklist[eventType]["enabled"] &&
             checklist[eventType]["triggered"]
         ) {
-            return <CheckIcon />;
+            return <CheckCircleIcon fontSize="small" color="success" />;
         }
 
         if (
             checklist[eventType]["enabled"] &&
             !checklist[eventType]["triggered"]
         ) {
-            return <XIcon />;
+            return <CancelIcon fontSize="small" color="error" />;
         }
     };
 
     return (
-        <Container>
-            <Checkbox
-                id={name}
-                type="checkbox"
-                checked={checklist[name]["enabled"]}
-                onChange={(e) => {
-                    if (e.target.checked) {
-                        enableEvent(name);
-                    } else {
-                        disableEvent(name);
-                    }
-                }}
+        <Stack direction="row" alignItems="center" mr={4}>
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        id={name}
+                        checked={checklist[name]["enabled"]}
+                        onChange={(e) => {
+                            if (e.target.checked) {
+                                enableEvent(name);
+                            } else {
+                                disableEvent(name);
+                            }
+                        }}
+                    />
+                }
+                label={name}
             />
-            <Label htmlFor={name}>{name}</Label>
             {getStatus(name)}
-        </Container>
+        </Stack>
     );
 };
-
-const Container = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-`;
-
-const Checkbox = styled.input`
-    cursor: pointer;
-`;
-
-const Label = styled.label`
-    cursor: pointer;
-`;
-
-const CheckIcon = styled(CheckCircleIcon)`
-    color: green;
-    height: 20px;
-    width: 20px;
-`;
-
-const XIcon = styled(XCircleIcon)`
-    color: red;
-    height: 20px;
-    width: 20px;
-`;
