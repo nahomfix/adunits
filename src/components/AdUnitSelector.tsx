@@ -23,9 +23,10 @@ export const AdUnitSelector: FC = () => {
         <FormControl
             sx={{
                 alignSelf: "flex-start",
+                width: 400,
             }}
         >
-            <InputLabel id="gamekey-label">Age</InputLabel>
+            <InputLabel id="gamekey-label">Game Key</InputLabel>
             <Select
                 labelId="gamekey-label"
                 id="gamekey-select"
@@ -34,9 +35,10 @@ export const AdUnitSelector: FC = () => {
                 onChange={(e: SelectChangeEvent) =>
                     changeGameKey(e.target.value)
                 }
-                placeholder="Please select an ad unit"
             >
-                <MenuItem value="">Please select an ad unit</MenuItem>
+                <MenuItem disabled value="">
+                    Please select an ad unit
+                </MenuItem>
                 {availableGameKeys.map((availableGameKey) => (
                     <MenuItem key={availableGameKey} value={availableGameKey}>
                         {availableGameKey}
