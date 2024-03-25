@@ -1,19 +1,21 @@
+import FormGroup from "@mui/material/FormGroup";
 import { FC } from "react";
-import styled from "styled-components";
 import { events } from "../constants/events";
 import { ChecklistItem } from "./ChecklistItem";
 
 export const Checklist: FC = () => {
     return (
-        <Stack>
+        <FormGroup
+            sx={{
+                height: {
+                    md: "500px",
+                    xs: "700px",
+                },
+            }}
+        >
             {events.map((event) => (
                 <ChecklistItem key={event} name={event} />
             ))}
-        </Stack>
+        </FormGroup>
     );
 };
-
-const Stack = styled.div`
-    display: flex;
-    flex-direction: column;
-`;

@@ -1,5 +1,8 @@
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FC } from "react";
-import styled from "styled-components";
 import { availableAdUnits } from "../constants/adUnits";
 import { useGameKeyStore } from "../store";
 
@@ -17,25 +20,28 @@ export const AdUnitSelector: FC = () => {
     };
 
     return (
-        <Container>
-            <label htmlFor="gameKey">Game Key</label>
-            <select
-                id="gameKey"
+        <FormControl
+            sx={{
+                alignSelf: "flex-start",
+            }}
+        >
+            <InputLabel id="gamekey-label">Age</InputLabel>
+            <Select
+                labelId="gamekey-label"
+                id="gamekey-select"
                 value={gameKey}
-                onChange={(e) => changeGameKey(e.target.value)}
+                label="Game Key"
+                onChange={(e: SelectChangeEvent) =>
+                    changeGameKey(e.target.value)
+                }
             >
-                <option value="">Please select an ad unit</option>
+                <MenuItem value="">Please select an ad unit</MenuItem>
                 {availableGameKeys.map((availableGameKey) => (
-                    <option key={availableGameKey} value={availableGameKey}>
+                    <MenuItem key={availableGameKey} value={availableGameKey}>
                         {availableGameKey}
-                    </option>
+                    </MenuItem>
                 ))}
-            </select>
-        </Container>
+            </Select>
+        </FormControl>
     );
 };
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-`;

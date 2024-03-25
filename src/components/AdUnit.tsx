@@ -1,5 +1,6 @@
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 import { FC, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 
 export interface AdUnitMetaData {
     game_key: string;
@@ -80,13 +81,18 @@ export const AdUnit: FC<AdUnitProps> = ({ id, src, data }) => {
     }, [data, id, src]);
 
     return (
-        <AdUnitContainer id="adunit" ref={adUnitRef}>
-            {!scriptLoaded && <span>Loading...</span>}
-        </AdUnitContainer>
+        <Box
+            id="adunit"
+            ref={adUnitRef}
+            sx={{
+                position: "relative",
+                minHeight: data?.height,
+                minWidth: data?.width,
+            }}
+        >
+            {!scriptLoaded && (
+                <Skeleton variant="rectangular" width={320} height={480} />
+            )}
+        </Box>
     );
 };
-
-const AdUnitContainer = styled.div`
-    position: relative;
-    min-height: 500px;
-`;
